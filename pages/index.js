@@ -2,22 +2,28 @@ import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 
-// import the web3 library with setup from lib/web3.js
 import { web3 } from '../lib/web3'
 
-// all from our components folder
 import Account from '../components/Account'
 import EthName from '../components/EthName'
 import Answer from '../components/Answer'
 import AnswerForm from '../components/AnswerForm'
 
 export default function Home() {
+  const [account, setAccount] = useState(null)
   // todo:
-  // 1. make the connect button work!
   // 2. get the answers from the API (see /api/answers.js file)
   // 3. add tipping like project 1
   // 4. make the user name look good
   // 5. let the user post their own reply
+
+  const connect = async () => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+
+    if (accounts.length > 0) {
+      setAccount(accounts[0])
+    }
+  }
 
   return (
     <main>
@@ -28,7 +34,7 @@ export default function Home() {
           <input type="text" placeholder="Search" />
         </form>
 
-        <button>Connect</button>
+        <Account account={account} connect={connect} />
       </header>
 
       <section className="question">
@@ -42,10 +48,10 @@ export default function Home() {
           </p>
 
           <div className="slides">
-            <Image src="/image-1.jpg" width="600" height="800" />
-            <Image src="/image-2.jpg" width="600" height="800" />
-            <Image src="/image-3.jpg" width="600" height="800" />
-            <Image src="/image-4.jpg" width="600" height="800" />
+            <Image src="/image-1.jpg" width="600" height="800" quality={60} />
+            <Image src="/image-2.jpg" width="600" height="800" quality={60} />
+            <Image src="/image-3.jpg" width="600" height="800" quality={60} />
+            <Image src="/image-4.jpg" width="600" height="800" quality={60} />
           </div>
         </div>
         <div className="meta">
