@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import { web3 } from '../lib/web3';
+import { useState, useEffect } from 'react'
+import { web3 } from '../lib/web3'
 
 const EnsName = function () {
   // TODO!
@@ -11,19 +11,12 @@ const EnsName = function () {
 
   return (
     <div className="eth-name">
-      <div className="icon">
-        {/* icon goes here */}
-      </div>
+      <div className="icon">{/* icon goes here */}</div>
 
       <div className="name">
-        <span className="primary">
-          {/* ENS name if one here */}
-        </span>
-        <span className="secondary">
-          {/* formatted address here */}
-        </span>
+        <span className="primary">{/* ENS name if one here */}</span>
+        <span className="secondary">{/* formatted address here */}</span>
       </div>
-     
     </div>
   )
 }

@@ -1,12 +1,9 @@
-// for next.js's <head> tag and rendering images
+import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 
 // import the web3 library with setup from lib/web3.js
 import { web3 } from '../lib/web3'
-
-// import react hooks
-import { useState, useEffect } from 'react'
 
 // all from our components folder
 import Account from '../components/Account'

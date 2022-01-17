@@ -1,8 +1,12 @@
 @import url('https://rsms.me/inter/inter.css');
 
-html { font-family: 'Inter', sans-serif; }
+html {
+  font-family: 'Inter', sans-serif;
+}
 @supports (font-variation-settings: normal) {
-  html { font-family: 'Inter var experimental', sans-serif; }
+  html {
+    font-family: 'Inter var experimental', sans-serif;
+  }
 }
 
 :root {
@@ -13,7 +17,7 @@ html { font-family: 'Inter', sans-serif; }
   --text-color: #1b221f;
 
   --form-element-border-color: #d7d5cd;
-  --form-element-placeholder-color: #AAA9A4;
+  --form-element-placeholder-color: #aaa9a4;
 
   --highlight-color: #397557;
   --focus-color: #3fa178;
@@ -24,19 +28,19 @@ html { font-family: 'Inter', sans-serif; }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #0A0B0A;
+    --background-color: #0a0b0a;
     --panel-color: #242926;
 
-    --action-panel-color: #2F3C36;
+    --action-panel-color: #2f3c36;
 
     --text-color: #ffffff;
 
-    --form-element-border-color: #3D5148;
-    --form-element-placeholder-color: #5D6360;
+    --form-element-border-color: #3d5148;
+    --form-element-placeholder-color: #5d6360;
 
     --focus-color: #397557;
     --highlight-color: #3fa178;
-    --inactive-color: #5D6360;
+    --inactive-color: #5d6360;
 
     --box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
   }
@@ -46,7 +50,7 @@ body {
   margin: 24px;
   /* font-family: Inter var, Arial; */
   font-size: 24px;
-  font-variation-settings: "wght" 350;
+  font-variation-settings: 'wght' 350;
   line-height: 32px;
   letter-spacing: -0.019em;
   font-variant-ligatures: contextual common-ligatures;
@@ -59,8 +63,6 @@ body {
 
   animation: change 2s infinite;
 }
-
-
 
 main {
   margin: 160px auto 120px auto;
@@ -94,13 +96,13 @@ header div.eth-name {
 h1 {
   font-size: 32px;
   line-height: 32px;
-  font-variation-settings: "wght" 800, "slnt" -10;
+  font-variation-settings: 'wght' 800, 'slnt' -10;
   color: var(--highlight-color);
 }
 
 h2 {
   font-size: 56px;
-  font-variation-settings: "wght" 600;
+  font-variation-settings: 'wght' 600;
   line-height: 64px;
   margin: 8px 0 24px 0;
 }
@@ -110,7 +112,7 @@ h3 {
   color: var(--highlight-color);
   font-size: 14px;
   line-height: 24px;
-  font-variation-settings: "wght" 800;
+  font-variation-settings: 'wght' 800;
   letter-spacing: -0.011em;
   text-transform: uppercase;
 }
@@ -123,8 +125,8 @@ p:last-child {
   margin: 0;
 }
 
-
-input[type=text], textarea {
+input[type='text'],
+textarea {
   font: inherit;
   outline-color: var(--highlight-color);
   background-color: var(--panel-color);
@@ -135,22 +137,23 @@ input[type=text], textarea {
   transition: outline-color 0.5s;
 }
 
-input[type=text] {
+input[type='text'] {
   font-size: 16px;
-  font-variation-settings: "wght" 600;
+  font-variation-settings: 'wght' 600;
   padding: 0 12px 0 12px;
 }
 
 textarea {
   min-height: 10em;
   margin: 0 0 16px 0;
-  
+
   padding: 24px;
   display: block;
   width: 100%;
 }
 
-input[type=text]:focus, textarea:focus {
+input[type='text']:focus,
+textarea:focus {
   border: 1px solid var(--highlight-color);
 }
 
@@ -168,12 +171,13 @@ button {
   font: inherit;
   font-size: 16px;
   line-height: 24px;
-  font-variation-settings: "wght" 700;
+  font-variation-settings: 'wght' 700;
   padding: 8px 16px;
   transition: background-color 0.25s;
 }
 
-button:focus, button:hover {
+button:focus,
+button:hover {
   background-color: var(--focus-color);
   cursor: pointer;
 }
@@ -195,7 +199,8 @@ section.answers {
   margin: 24px 0 0 0;
 }
 
-div.answer, form.answer-form {
+div.answer,
+form.answer-form {
   padding: 24px;
   background-color: var(--panel-color);
   border-radius: 8px;
@@ -204,7 +209,9 @@ div.answer, form.answer-form {
   transition: transform 0.5s, box-shadow 0.5s;
 }
 
-div.answer:hover, form.answer-form:hover, form.answer-form:focus-within {
+div.answer:hover,
+form.answer-form:hover,
+form.answer-form:focus-within {
   transform: translate(0, -4px);
   box-shadow: var(--box-shadow);
 }
@@ -215,7 +222,7 @@ form.answer-form {
 
 div.eth-name {
   font-size: 16px;
-  font-variation-settings: "wght" 600;
+  font-variation-settings: 'wght' 600;
   letter-spacing: -0.011em;
 
   display: flex;
@@ -251,35 +258,37 @@ div.eth-name span.secondary {
   font-size: 0.75em;
 }
 
-
-div.eth-name img, div.eth-name div.paper {
+div.eth-name img,
+div.eth-name div.paper {
   display: inline-block;
   width: 32px;
   height: 32px;
   border-radius: 50%;
   overflow: hidden;
 
-  image-rendering: -moz-crisp-edges;         /* Firefox */
-  image-rendering:   -o-crisp-edges;         /* Opera */
-  image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+  image-rendering: -moz-crisp-edges; /* Firefox */
+  image-rendering: -o-crisp-edges; /* Opera */
+  image-rendering: -webkit-optimize-contrast; /* Webkit (non-standard naming) */
   image-rendering: crisp-edges;
-  -ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+  -ms-interpolation-mode: nearest-neighbor; /* IE (non-standard property) */
 }
 
-strong, em {
-  font-variation-settings: "wght" 480, "slnt" -10;
+strong,
+em {
+  font-variation-settings: 'wght' 480, 'slnt' -10;
 }
 
 .main a {
   color: var(--highlight-color);
 }
 
-.main a:hover, .main a:focus {
+.main a:hover,
+.main a:focus {
   color: var(--focus-color);
 }
 
 h3:before {
-  content: "";
+  content: '';
   display: inline-block;
   width: 0.7em;
   height: 0.7em;
@@ -306,12 +315,12 @@ div.slides {
 div.slides::-webkit-scrollbar {
   height: 4px;
 }
- 
+
 div.slides::-webkit-scrollbar-track {
   background: var(--panel-color);
   border-radius: 0;
 }
- 
+
 div.slides::-webkit-scrollbar-thumb {
   background-color: var(--focus-color);
 }
@@ -327,7 +336,7 @@ div.loading {
   background: var(--action-panel-color);
   text-align: center;
   padding: 96px;
-  font-variation-settings: "wght" 600;
+  font-variation-settings: 'wght' 600;
   border-radius: 8px;
 }
 
