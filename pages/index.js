@@ -39,6 +39,11 @@ export default function Home() {
 
     checkLoggedIn();
 
+    // listen for changes in the accounts
+    window.ethereum.on('accountsChanged', (ethAccounts) => {
+      setAccounts(ethAccounts);
+    });
+
     return () => {
       checkLoggedIn();
     };
