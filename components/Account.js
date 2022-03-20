@@ -1,11 +1,11 @@
-import EthName from './EthName'
+import EthName from './EthName';
 
 const Account = function ({ account, connect }) {
   if (account) {
-    return <span>{account}</span>
+    return <span>{account}</span>;
   }
 
-  return <button onClick={connect}>Connect</button>
-}
+  return <button onClick={connect}>Connect</button>;
+};
 
-export default Account
+export default Account;

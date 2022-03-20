@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { web3 } from '../lib/web3'
+import { useState, useEffect } from 'react';
+import { web3 } from '../lib/web3';
 
 const EnsName = function () {
   // TODO!
@@ -18,7 +18,7 @@ const EnsName = function () {
         <span className="secondary">{/* formatted address here */}</span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default EnsName
+export default EnsName;

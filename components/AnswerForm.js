@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 const AnswerForm = function ({ accounts, setAnswers, isLoggedIn }) {
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState('');
 
   const post = async function (event) {
-    event.preventDefault()
+    event.preventDefault();
 
     setAnswers((current) => {
       return [
@@ -13,10 +13,10 @@ const AnswerForm = function ({ accounts, setAnswers, isLoggedIn }) {
           reply: message,
           account: '0xb25bf3990c5a274a758a2a3a4cc90b3e407eaaf4',
         },
-      ]
-    })
+      ];
+    });
 
-    setMessage('')
+    setMessage('');
 
     // TODO!
     // send the message state to the /api/answers
@@ -41,7 +41,7 @@ const AnswerForm = function ({ accounts, setAnswers, isLoggedIn }) {
     // .catch(error => {
     //  console.error(error)
     // })
-  }
+  };
 
   return (
     <form onSubmit={post} className="answer-form">
@@ -53,7 +53,7 @@ const AnswerForm = function ({ accounts, setAnswers, isLoggedIn }) {
 
       <button disabled={!isLoggedIn}>Reply</button>
     </form>
-  )
-}
+  );
+};
 
-export default AnswerForm
+export default AnswerForm;
