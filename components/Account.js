@@ -1,8 +1,8 @@
 import EthName from './EthName';
 
-const Account = function ({ account, connect }) {
-  if (account) {
-    return <span>{account}</span>;
+const Account = function ({ accounts, isLoggedIn, connect }) {
+  if (isLoggedIn) {
+    return <span>{accounts[0]}</span>;
   }
 
   return <button onClick={connect}>Connect</button>;

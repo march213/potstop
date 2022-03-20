@@ -10,7 +10,8 @@ import Answer from '../components/Answer';
 import AnswerForm from '../components/AnswerForm';
 
 export default function Home() {
-  const [account, setAccount] = useState(null);
+  const [accounts, setAccounts] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   // todo:
   // 2. get the answers from the API (see /api/answers.js file)
   // 3. add tipping like project 1
@@ -18,14 +19,30 @@ export default function Home() {
   // 5. let the user post their own reply
 
   const connect = async () => {
-    const accounts = await window.ethereum.request({
-      method: 'eth_requestAccounts',
-    });
-
-    if (accounts.length > 0) {
-      setAccount(accounts[0]);
-    }
+    const ethAccounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    if (ethAccounts.length > 0) setAccounts(ethAccounts);
   };
+
+  useEffect(() => {
+    if (accounts.length > 0) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [accounts]);
+
+  useEffect(() => {
+    const checkLoggedIn = async () => {
+      const ethAccounts = await window.ethereum.request({ method: 'eth_accounts' });
+      if (ethAccounts.length > 0) setAccounts(ethAccounts);
+    };
+
+    checkLoggedIn();
+
+    return () => {
+      checkLoggedIn();
+    };
+  }, []);
 
   return (
     <main>
@@ -36,7 +53,7 @@ export default function Home() {
           <input type="text" placeholder="Search" />
         </form>
 
-        <Account account={account} connect={connect} />
+        <Account accounts={accounts} isLoggedIn={isLoggedIn} connect={connect} />
       </header>
 
       <section className="question">
