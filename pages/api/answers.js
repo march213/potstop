@@ -66,6 +66,8 @@ export default function handler(req, res) {
       },
     ];
 
-    res.setHeader('Content-Type', 'application/json').status(200).json({ answers: data });
+    res.setHeader('Content-Type', 'application/json').status(200).json({
+      answers: data,
+    });
   }
 }

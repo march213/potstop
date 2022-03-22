@@ -12,8 +12,10 @@ import AnswerForm from '../components/AnswerForm';
 export default function Home() {
   const [accounts, setAccounts] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [answers, setAnswers] = useState([]);
+
   // todo:
-  // 2. get the answers from the API (see /api/answers.js file)
   // 3. add tipping like project 1
   // 4. make the user name look good
   // 5. let the user post their own reply
@@ -37,7 +39,25 @@ export default function Home() {
       if (ethAccounts.length > 0) setAccounts(ethAccounts);
     };
 
+    // fetch the answers from the API
+    const fetchAnswers = async () => {
+      try {
+        setIsLoading(true);
+
+        const response = await fetch('/api/answers');
+        const json = await response?.json();
+
+        if (json) {
+          setAnswers(json.answers);
+          setIsLoading(false);
+        }
+      } catch (e) {
+        // @TODO: handle error
+      }
+    };
+
     checkLoggedIn();
+    fetchAnswers();
 
     // listen for changes in the accounts
     window.ethereum.on('accountsChanged', (ethAccounts) => {
@@ -46,6 +66,7 @@ export default function Home() {
 
     return () => {
       checkLoggedIn();
+      fetchAnswers();
     };
   }, []);
 
@@ -96,7 +117,18 @@ export default function Home() {
       </section>
 
       <section className="answers">
-        <div className="loading">Loading answers...</div>
+        {isLoading ? <div className="loading">Loading the answers...</div> : null}
+        {!isLoading && answers?.length
+          ? answers?.map((answer, index) => (
+              <Answer
+                key={answer.answerId}
+                number={index + 1}
+                answer={answer}
+                accounts={accounts}
+                isLoggedIn={isLoggedIn}
+              />
+            ))
+          : null}
       </section>
 
       <Head>
