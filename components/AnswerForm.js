@@ -5,6 +5,7 @@ const AnswerForm = function ({ accounts, setAnswers, isLoggedIn }) {
 
   const post = async function (event) {
     event.preventDefault();
+    return;
 
     setAnswers((current) => {
       return [
@@ -51,7 +52,9 @@ const AnswerForm = function ({ accounts, setAnswers, isLoggedIn }) {
         onChange={(e) => setMessage(e.target.value)}
       ></textarea>
 
-      <button disabled={!isLoggedIn}>Reply</button>
+      <button disabled={!isLoggedIn} onClick={post}>
+        Reply
+      </button>
     </form>
   );
 };

@@ -1,7 +1,7 @@
-import { web3 } from '../lib/web3';
 import { useState, useEffect } from 'react';
+import { web3 } from '../lib/web3';
 
-const Tip = function ({ isLoggedIn, accounts, address }) {
+const Tip = function ({ isLoggedIn = false, accounts, address }) {
   const send = function () {
     if (isLoggedIn) {
       const price = web3.utils.toWei('0.01', 'ether');

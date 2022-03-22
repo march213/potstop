@@ -15,14 +15,14 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [answers, setAnswers] = useState([]);
 
-  // todo:
-  // 3. add tipping like project 1
-  // 4. make the user name look good
-  // 5. let the user post their own reply
-
   const connect = async () => {
-    const ethAccounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    if (ethAccounts.length > 0) setAccounts(ethAccounts);
+    const ethAccounts = await window.ethereum.request({
+      method: 'eth_requestAccounts',
+    });
+
+    if (ethAccounts.length > 0) {
+      setAccounts(ethAccounts);
+    }
   };
 
   useEffect(() => {
@@ -34,12 +34,19 @@ export default function Home() {
   }, [accounts]);
 
   useEffect(() => {
+    let shouldLogin = true;
     const checkLoggedIn = async () => {
-      const ethAccounts = await window.ethereum.request({ method: 'eth_accounts' });
-      if (ethAccounts.length > 0) setAccounts(ethAccounts);
+      const ethAccounts = await window.ethereum.request({
+        method: 'eth_accounts',
+      });
+
+      if (ethAccounts.length > 0 && shouldLogin) {
+        setAccounts(ethAccounts);
+      }
     };
 
     // fetch the answers from the API
+    let shouldFetchAnswers = true;
     const fetchAnswers = async () => {
       try {
         setIsLoading(true);
@@ -47,7 +54,7 @@ export default function Home() {
         const response = await fetch('/api/answers');
         const json = await response?.json();
 
-        if (json) {
+        if (json && shouldFetchAnswers) {
           setAnswers(json.answers);
           setIsLoading(false);
         }
@@ -60,13 +67,16 @@ export default function Home() {
     fetchAnswers();
 
     // listen for changes in the accounts
-    window.ethereum.on('accountsChanged', (ethAccounts) => {
+    const handleAccoutsChange = (ethAccounts) => {
       setAccounts(ethAccounts);
-    });
+    };
+
+    window.ethereum.on('accountsChanged', handleAccoutsChange);
 
     return () => {
-      checkLoggedIn();
-      fetchAnswers();
+      shouldLogin = false;
+      shouldFetchAnswers = false;
+      window.ethereum.removeListener('accountsChanged', handleAccoutsChange);
     };
   }, []);
 
@@ -121,7 +131,7 @@ export default function Home() {
         {!isLoading && answers?.length
           ? answers?.map((answer, index) => (
               <Answer
-                key={answer.answerId}
+                key={`${answer.answerId}-${index}`}
                 number={index + 1}
                 answer={answer}
                 accounts={accounts}
@@ -129,6 +139,7 @@ export default function Home() {
               />
             ))
           : null}
+        {!isLoading ? <AnswerForm accounts={accounts} setAnswers={setAnswers} isLoggedIn={isLoggedIn} /> : null}
       </section>
 
       <Head>

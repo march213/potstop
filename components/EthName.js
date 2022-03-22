@@ -11,13 +11,17 @@ const ens = new ENS({
 
 const EnsName = function ({ address }) {
   const [name, setName] = useState('');
+  const [avatar, setAvatar] = useState(null);
+
   const formattedAddress = address.substr(0, 8) + '...' + address.substr(-4);
   const seed = jsNumberForAddress(address);
 
   useEffect(() => {
+    let shouldGetName = true;
     const getName = async () => {
       const ethName = await ens.getName(address);
-      if (ethName) {
+
+      if (ethName && shouldGetName) {
         setName(ethName.name);
       }
     };
@@ -25,14 +29,46 @@ const EnsName = function ({ address }) {
     getName();
 
     return () => {
-      getName();
+      shouldGetName = false;
     };
   }, [address]);
+
+  useEffect(() => {
+    if (!name) return;
+
+    let shouldGetAvatar = true;
+    const getAvatar = async () => {
+      const ethAvatar = await ens.name(name).getText('avatar');
+
+      if (ethAvatar && shouldGetAvatar) {
+        setAvatar(ethAvatar);
+      }
+    };
+
+    getAvatar();
+
+    return () => {
+      shouldGetAvatar = false;
+    };
+  }, [name]);
 
   return (
     <div className="eth-name">
       <div className="icon">
-        <Jazzicon diameter={32} seed={seed} />
+        {avatar ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={avatar}
+            width={32}
+            height={32}
+            alt="avatar"
+            style={{
+              objectFit: 'cover',
+            }}
+          />
+        ) : (
+          <Jazzicon diameter={32} seed={seed} />
+        )}
       </div>
 
       <div className="name">
