@@ -2,7 +2,7 @@ import EthName from './EthName';
 
 const Account = function ({ accounts, isLoggedIn, connect }) {
   if (isLoggedIn) {
-    return <span>{accounts[0]}</span>;
+    return <EthName address={accounts[0]} />;
   }
 
   return <button onClick={connect}>Connect</button>;
