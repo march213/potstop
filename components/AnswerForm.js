@@ -42,7 +42,7 @@ const AnswerForm = function ({ accounts, setAnswers, isLoggedIn }) {
         placeholder="Please be nice and courteous in your answers!"
         value={message}
         onChange={(e) => setMessage(e.target.value)}
-      ></textarea>
+      />
 
       <button disabled={!isLoggedIn} onClick={post}>
         Reply
