@@ -20,7 +20,15 @@ const Tip = function ({ isLoggedIn, accounts, address }) {
     }
   };
 
-  return <button onClick={send}>Tip 0.01 ETH</button>;
+  if (accounts[0] === address) {
+    return null;
+  }
+
+  return (
+    <button disabled={!isLoggedIn} onClick={send}>
+      Tip 0.01 ETH
+    </button>
+  );
 };
 
 export default Tip;
