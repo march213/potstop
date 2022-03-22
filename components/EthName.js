@@ -1,13 +1,33 @@
 import { useState, useEffect } from 'react';
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
+import ENS, { getEnsAddress } from '@ensdomains/ensjs';
+
 import { web3 } from '../lib/web3';
 
-const EnsName = function ({ address }) {
-  // TODO!
-  // check for ENS domain
+const ens = new ENS({
+  provider: web3.currentProvider,
+  ensAddress: getEnsAddress('1'),
+});
 
+const EnsName = function ({ address }) {
+  const [name, setName] = useState('');
   const formattedAddress = address.substr(0, 8) + '...' + address.substr(-4);
   const seed = jsNumberForAddress(address);
+
+  useEffect(() => {
+    const getName = async () => {
+      const ethName = await ens.getName(address);
+      if (ethName) {
+        setName(ethName.name);
+      }
+    };
+
+    getName();
+
+    return () => {
+      getName();
+    };
+  }, [address]);
 
   return (
     <div className="eth-name">
@@ -16,7 +36,7 @@ const EnsName = function ({ address }) {
       </div>
 
       <div className="name">
-        <span className="primary">{/* ENS name if one here */}</span>
+        <span className="primary">{name}</span>
         <span className="secondary">{formattedAddress}</span>
       </div>
     </div>
